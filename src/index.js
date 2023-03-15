@@ -12,6 +12,3 @@ root.render(
     <App />
   </React.StrictMode>
 );
-
-//font-family: 'Lexend Deca', sans-serif;
-//font-family: 'Playball', cursive;
