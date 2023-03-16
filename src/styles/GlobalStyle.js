@@ -40,9 +40,18 @@ input{
     ::placeholder{
         color: #DBDBDB;
     }
+
+    :disabled{
+        background-color: #F2F2F2;
+        color: #D4D4D4;
+        border-color: #D4D4D4;
+    }
 }
 
 button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
     height: 45px;
     width: 100%;
     background-color: #52B6FF;

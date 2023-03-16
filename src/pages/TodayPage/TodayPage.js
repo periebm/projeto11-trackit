@@ -1,6 +1,8 @@
 import { HabitContainer, PageContainer, IconContainer } from "./styled"
 
-export default function TodayPage() {
+export default function TodayPage({token}) {
+    console.log(token)
+
     return (
         <PageContainer>
             <h3>Segunda, 17/05</h3>
