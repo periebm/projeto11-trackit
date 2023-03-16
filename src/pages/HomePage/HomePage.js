@@ -79,7 +79,7 @@ export default function HomePage({ setToken }) {
                 >
                 </input>
 
-                <button data-test="login-btn" type="submit">{loadDots()}</button>
+                <button data-test="login-btn" disabled={loading} type="submit">{loadDots()}</button>
                 <Link data-test="signup-link" to={"/cadastro"}>
                     <h2>Não tem uma conta? Cadastre-se!</h2>
                 </Link>
