@@ -6,7 +6,7 @@ import { PageContainer } from "./styled"
 import { ThreeDots } from 'react-loader-spinner'
 
 
-export default function HomePage({ setToken }) {
+export default function HomePage({ setToken, setImage }) {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const navigate = useNavigate();
@@ -21,7 +21,9 @@ export default function HomePage({ setToken }) {
 
         axios.post(URL, { email: email, password: password })
             .then((result) => {
+                console.log(result.data)
                 setToken(result.data.token)
+                setImage(result.data.image)
                 navigate("/hoje")
             }).catch((err) => {
                 alert(err.response.data.message)

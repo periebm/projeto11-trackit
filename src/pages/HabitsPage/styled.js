@@ -47,6 +47,7 @@ export const AddHabitContainer = styled.div`
 `
 
 export const WeekdaysContainer = styled.div`
+        display: flex;
         button{
         width: 30px;
         height: 30px;

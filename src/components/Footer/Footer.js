@@ -8,16 +8,17 @@ export default function Footer() {
     {
         if (location.pathname !== '/cadastro' && location.pathname !== '/') {
             return (
-                <FooterContainer>
-                    <Link to={"/habitos"}>
+                <FooterContainer data-test="menu">
+                    <Link to={"/habitos"} data-test="habit-link">
                         <h3>Hábitos</h3>
                     </Link>
 
-                    <Link to={"/historico"}>
+                    <Link to={"/historico"} data-test="history-link">
                         <h3>Histórico</h3>
                     </Link>
+
                     <CircularContainer>
-                        <Link to={"/hoje"}>
+                        <Link to={"/hoje"} data-test="today-link">
                             <CircularProgressbar
                                 value={75}
                                 text={`Hoje`}

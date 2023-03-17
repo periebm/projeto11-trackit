@@ -1,15 +1,18 @@
 import { useLocation } from "react-router-dom"
 import { MenuContainer } from "./styled"
+import { userContext } from "../../context/userContext";
+import { useContext } from "react";
 
-export default function Menu() {
+
+export default function Menu({userImage}) {
     const location = useLocation();
     {
         if (location.pathname !== '/cadastro' && location.pathname !== '/' )
         {
             return (
-                <MenuContainer>
+                <MenuContainer data-test="header">
                     <h1>TrackIt</h1>
-                    <img src="https://images.igdb.com/igdb/image/upload/t_cover_big_2x/co4ezc.jpg" />
+                    <img src={userImage} />
                 </MenuContainer>
             )
         }
