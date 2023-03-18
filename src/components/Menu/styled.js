@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const MenuContainer = styled.div`
+    z-index: 10;
     height: 70px;
     padding: 0 18px;
     display: flex;

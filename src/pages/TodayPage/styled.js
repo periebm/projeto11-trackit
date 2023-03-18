@@ -1,9 +1,9 @@
 import styled from "styled-components";
 
 export const PageContainer = styled.div`
-    height: 100vh;
+    min-height: 100vh;
     background-color: #E5E5E5;
-    padding: 98px 18px 0px 17px;
+    padding: 98px 18px 90px 17px;
 
     h3{
         font-size: 23px;

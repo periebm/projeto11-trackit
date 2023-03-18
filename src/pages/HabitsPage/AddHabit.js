@@ -13,7 +13,10 @@ export default function AddHabit({ setAddFlag, selectedDays, daysSelection, setS
 
     function saveHabit(e) {
         e.preventDefault()
-
+        if(name.length === 0){
+         alert("Necessario dar um nome para o habito")
+         return
+        }
         setLoading(true)
         axios.post(
             `${URL}/habits`,
@@ -63,7 +66,7 @@ export default function AddHabit({ setAddFlag, selectedDays, daysSelection, setS
                     data-test="habit-name-input"
                     placeholder="nome do hábito"
                     type="text"
-                    required
+                    
                     value={name}
                     onChange={e => setName(e.target.value)}
                     disabled={loading}
