@@ -26,6 +26,7 @@ export default function HabitsPage() {
 
     }, [addHabitFlag])
 
+
     function daysSelection(i) {
         if (selectedDays.includes(i)) {
             const newSelectedDays = selectedDays.filter(day => day !== i)
@@ -35,6 +36,16 @@ export default function HabitsPage() {
             const newSelectedDays = [...selectedDays, i]
             setSelectedDays(newSelectedDays)
             console.log(newSelectedDays)
+        }
+    }
+    
+    
+    function checkDay(days, index){
+        if(days === null || days === undefined){
+            return false;
+        }
+        else if(days.includes(index)){
+            return true;
         }
     }
 
@@ -57,7 +68,8 @@ export default function HabitsPage() {
                 {habitsList.map(h => (
                     <HabitContainer data-test="habit-container">
                         <h4 data-test="habit-name">{h.name}</h4>
-                        {console.log(h.days)}
+
+                        {h.days !== undefined &&
                         <WeekdaysContainer>
                             {weekDays.map((d, i) => (
                                 <DaysButton
@@ -67,7 +79,7 @@ export default function HabitsPage() {
                                 >
                                     {d}
                                 </DaysButton>))}
-                        </WeekdaysContainer>
+                        </WeekdaysContainer>}
 
 
                         <ion-icon name="trash-outline"></ion-icon>
