@@ -1,14 +1,16 @@
 import { PageContainer } from "./styled";
 import ImageTrackIt from "../../components/ImageTrackIt/ImageTrackIt";
-import { Link, Navigate, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useState,useContext } from "react";
 import axios from "axios"
 import { ThreeDots } from 'react-loader-spinner'
+import { userContext } from "../../context/userContext"
 
 export default function RegisterPage() {
     const [userData, setData] = useState({ email: "", name: "", password: "", image: "" })
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false)
+    const {URL} = useContext(userContext)
 
     function handeChange(e) {
         setData({ ...userData, [e.target.name]: e.target.value })
@@ -17,10 +19,8 @@ export default function RegisterPage() {
     function signUp(e) {
         e.preventDefault()
 
-        const URL = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up"
         setLoading(true);
-
-        axios.post(URL, { email: userData.email, name: userData.name, password: userData.password, image: userData.image })
+        axios.post(`${URL}/auth/sign-up`, { email: userData.email, name: userData.name, password: userData.password, image: userData.image })
             .then((result) => {
                 navigate("/")
             }).catch((err) => {

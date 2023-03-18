@@ -1,49 +1,82 @@
-import { AddContainer, PageContainer, AddHabitContainer, WeekdaysContainer, HabitContainer, SaveCancelButtonsContainer} from "./styled"
-<h3>Meus habitos</h3>   
+import { AddContainer, PageContainer, DaysButton, WeekdaysContainer, HabitContainer } from "./styled"
+import { useContext, useEffect, useState } from "react"
+import { userContext } from "../../context/userContext"
+import axios from "axios"
+import AddHabit from "./AddHabit"
+import { weekDays } from "../../constants/constants"
+
 export default function HabitsPage() {
+    const { token, URL } = useContext(userContext)
+    const [habitsList, setHabitsList] = useState([""])
+    const [addHabitFlag, setAddFlag] = useState(false);
+    const config = {
+        headers: { Authorization: `Bearer ${token}` }
+    }
+    const [selectedDays, setSelectedDays] = useState([]);
+
+    useEffect(() => {
+        axios.get(`${URL}/habits`, config)
+            .then((result) => {
+                console.log(result.data)
+                setHabitsList(result.data)
+            })
+            .catch((err) => {
+                alert(err.response.data.message)
+            });
+
+    }, [addHabitFlag])
+
+    function daysSelection(i) {
+        if (selectedDays.includes(i)) {
+            const newSelectedDays = selectedDays.filter(day => day !== i)
+            setSelectedDays(newSelectedDays)
+            console.log(newSelectedDays)
+        } else {
+            const newSelectedDays = [...selectedDays, i]
+            setSelectedDays(newSelectedDays)
+            console.log(newSelectedDays)
+        }
+    }
+
     return (
         <>
             <PageContainer>
                 <AddContainer>
-                    <h3>Meus hábitos</h3>            
-                    <button>+</button>
+                    <h3>Meus hábitos</h3>
+                    <button data-test="habit-create-btn" onClick={() => setAddFlag(true)}>+</button>
                 </AddContainer>
-                
-                <AddHabitContainer>
-                    <input placeholder="nome do hábito"></input>
-                    <WeekdaysContainer>
-                        <button>D</button>
-                        <button>S</button>
-                        <button>T</button>
-                        <button>Q</button>
-                        <button>Q</button>
-                        <button>S</button>
-                        <button>S</button>
-                    </WeekdaysContainer>
 
-                    <SaveCancelButtonsContainer>
-                        <span>Cancelar</span>
-                        <button>Salvar</button>
-                    </SaveCancelButtonsContainer>
-                </AddHabitContainer>
-
-                <HabitContainer>
-                <h4>Ler 1 capítulo de livro</h4>
-                
-                <WeekdaysContainer>
-                        <button>D</button>
-                        <button>S</button>
-                        <button>T</button>
-                        <button>Q</button>
-                        <button>Q</button>
-                        <button>S</button>
-                        <button>S</button>
-                    </WeekdaysContainer>
-                    <ion-icon name="trash-outline"></ion-icon>
-                </HabitContainer>
+                {addHabitFlag && (<AddHabit
+                    setAddFlag={setAddFlag}
+                    daysSelection={daysSelection}
+                    selectedDays={selectedDays}
+                    setSelectedDays={setSelectedDays}
+                />)}
 
 
-                <p> Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear! </p>
+                {habitsList.map(h => (
+                    <HabitContainer data-test="habit-container">
+                        <h4 data-test="habit-name">{h.name}</h4>
+                        {console.log(h.days)}
+                        <WeekdaysContainer>
+                            {weekDays.map((d, i) => (
+                                <DaysButton
+                                    data-test="habit-day"
+                                    daySelected={(h.days).includes(i)}
+                                    key={i}
+                                >
+                                    {d}
+                                </DaysButton>))}
+                        </WeekdaysContainer>
+
+
+                        <ion-icon name="trash-outline"></ion-icon>
+                    </HabitContainer>
+                ))}
+
+
+                {habitsList.length === 0 && (<p> Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</p>)}
+
             </PageContainer>
         </>
     )

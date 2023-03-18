@@ -1,27 +1,26 @@
 import axios from "axios"
-import { useState } from "react"
+import { useContext, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import ImageTrackIt from "../../components/ImageTrackIt/ImageTrackIt"
 import { PageContainer } from "./styled"
 import { ThreeDots } from 'react-loader-spinner'
+import { userContext } from "../../context/userContext"
 
-
-export default function HomePage({ setToken, setImage }) {
+export default function HomePage({setImage }) {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false)
-
+    const {token, setToken, URL} = useContext(userContext)
 
     function signIn(e) {
         e.preventDefault()
 
-        const URL = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login"
         setLoading(true);
 
-        axios.post(URL, { email: email, password: password })
+        axios.post(`${URL}/auth/login`, { email: email, password: password })
             .then((result) => {
-                console.log(result.data)
+                //console.log(result.data)
                 setToken(result.data.token)
                 setImage(result.data.image)
                 navigate("/hoje")

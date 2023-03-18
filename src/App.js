@@ -7,7 +7,8 @@ import HistoryPage from "./pages/HistoryPage/HistoryPage";
 import HomePage from "./pages/HomePage/HomePage";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import TodayPage from "./pages/TodayPage/TodayPage";
-
+import { userContext } from "././context/userContext"
+import { URL } from "./constants/constants";
 
 function App() {
 
@@ -18,13 +19,15 @@ function App() {
 
     <BrowserRouter>
       <Menu userImage={userImage} />
-      <Routes>
-        <Route path="/" element={<HomePage setToken={setToken} setImage={setImage} />} />
-        <Route path="/cadastro" element={<RegisterPage />} />
-        <Route path="/habitos" element={<HabitsPage />} />
-        <Route path="/hoje" element={<TodayPage token={token} />} />
-        <Route path="/historico" element={<HistoryPage />} />
-      </Routes>
+      <userContext.Provider value={{token, setToken, URL}}>
+        <Routes>
+          <Route path="/" element={<HomePage setImage={setImage} />} />
+          <Route path="/cadastro" element={<RegisterPage />} />
+          <Route path="/habitos" element={<HabitsPage />} />
+          <Route path="/hoje" element={<TodayPage />} />
+          <Route path="/historico" element={<HistoryPage />} />
+        </Routes>
+      </userContext.Provider>
       <Footer />
     </BrowserRouter>
   );

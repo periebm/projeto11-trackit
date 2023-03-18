@@ -48,17 +48,19 @@ export const AddHabitContainer = styled.div`
 
 export const WeekdaysContainer = styled.div`
         display: flex;
-        button{
+`
+
+export const DaysButton = styled.button`
         width: 30px;
         height: 30px;
-        background-color: white;
-        color: #D4D4D4;
+        background-color: ${(props) => props.daySelected ? "#DBDBDB" : "white"};
+        color: ${(props) => props.daySelected ? "white" : "#DBDBDB"};
         border-radius: 5px;
         border: 1px solid #D4D4D4;
         font-size: 20px;
         margin-right: 4px;
-    }
 `
+
 export const SaveCancelButtonsContainer = styled.div`
         margin-top: 26px;
         display: flex;
