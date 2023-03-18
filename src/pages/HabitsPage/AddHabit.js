@@ -1,5 +1,5 @@
 import { useEffect, useState, useContext } from "react"
-import { AddHabitContainer, WeekdaysContainer, DaysButton, SaveCancelButtonsContainer } from "./styled"
+import { AddHabitContainer, WeekdaysContainer, DaysButton,CancelButton, SaveCancelButtonsContainer } from "./styled"
 import { ThreeDots } from 'react-loader-spinner'
 import axios from "axios"
 import { userContext } from "../../context/userContext"
@@ -84,8 +84,8 @@ export default function AddHabit({ setAddFlag, selectedDays, daysSelection, setS
                 </WeekdaysContainer>
 
                 <SaveCancelButtonsContainer>
-                    <span data-test="habit-create-cancel-btn" onClick={() => { setAddFlag(false); setSelectedDays([]); }}>Cancelar</span>
-                    <button data-test="habit-create-save-btn" type="submit">{loadDots()}</button>
+                    <CancelButton data-test="habit-create-cancel-btn" type="button" disabled={loading} onClick={() => { setAddFlag(false); setSelectedDays([]); }}>Cancelar</CancelButton>
+                    <button data-test="habit-create-save-btn" disabled={loading} type="submit">{loadDots()}</button>
                 </SaveCancelButtonsContainer>
             </form>
         </AddHabitContainer>

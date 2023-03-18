@@ -68,14 +68,11 @@ export const SaveCancelButtonsContainer = styled.div`
         align-items: center;
         button{
             padding: 0 17px;
-            margin-left: 23px;
+            margin-left: 10px;
             width: fit-content;
             font-size: 16px;
         }
-        span{
-            font-size: 16px;
-            color: #52B6FF;
-        }
+
 `
 
 export const HabitContainer = styled.div`
@@ -97,4 +94,12 @@ export const HabitContainer = styled.div`
     font-size: 15px;
     color: #666666;
  }
+`
+
+export const CancelButton = styled.button`
+            background-color: white;
+            font-size: 16px;
+            color: #52B6FF;
+            margin: 0px;
+            padding: 0px;
 `
