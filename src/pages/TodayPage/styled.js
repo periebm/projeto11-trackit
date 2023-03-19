@@ -12,13 +12,13 @@ export const PageContainer = styled.div`
         line-height: 29px;
     }
 
-    h4{
-        color: #BABABA;
-        font-size: 18px;
-        line-height: 23px;
-    }
 `
 
+export const ConcludedText = styled.h4`
+        color: ${props=> props.checkColor ? "#8FC549" :"#BABABA"};
+        font-size: 18px;
+        line-height: 23px;
+    `
 export const HabitContainer = styled.div`
     display: flex;
     justify-content: space-between;
@@ -38,6 +38,10 @@ export const HabitContainer = styled.div`
         line-height: 17px;
     }
 
+`
+
+export const Sequence = styled.span`
+    color: ${props=> props.checkColor ? "#8FC549" :"#666666"};
 `
 
 export const IconContainer = styled.div`
