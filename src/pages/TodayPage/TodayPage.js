@@ -5,7 +5,7 @@ import { userContext } from "../../context/userContext"
 import dayjs from "dayjs"
 import 'dayjs/locale/pt-br'
 
-export default function TodayPage() {
+export default function TodayPage({setPercentage}) {
 
     const { token, URL } = useContext(userContext)
     const config = {
@@ -18,7 +18,6 @@ export default function TodayPage() {
     const [allDone, setAllDone] = useState(false)
 
     useEffect(() => {
-        console.log(habitsList)
         axios.get(`${URL}/habits/today`, config)
             .then((result) => {
                 setHabitsList(result.data);
@@ -39,6 +38,7 @@ export default function TodayPage() {
                 if(h.done === true) doneQtd++;
             });
             const percentage = (doneQtd/list.length)*100;
+            setPercentage(percentage)
             if(percentage > 0) {
                 setText(`${percentage.toFixed(0)}% dos hábitos concluídos`)
                 setAllDone(true);

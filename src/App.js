@@ -14,7 +14,7 @@ function App() {
 
   const [token, setToken] = useState("")
   const [userImage, setImage] = useState("https://www.refugee-action.org.uk/wp-content/uploads/2016/10/anonymous-user.png")
-
+  const [footerPercentage, setPercentage] = useState(0)
   return (
 
     <BrowserRouter>
@@ -24,11 +24,11 @@ function App() {
           <Route path="/" element={<HomePage setImage={setImage} />} />
           <Route path="/cadastro" element={<RegisterPage />} />
           <Route path="/habitos" element={<HabitsPage />} />
-          <Route path="/hoje" element={<TodayPage />} />
+          <Route path="/hoje" element={<TodayPage setPercentage={setPercentage} />} />
           <Route path="/historico" element={<HistoryPage />} />
         </Routes>
       </userContext.Provider>
-      <Footer />
+      <Footer footerPercentage={footerPercentage} />
     </BrowserRouter>
   );
 }

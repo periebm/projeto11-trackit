@@ -3,7 +3,7 @@ import { FooterContainer, CircularContainer } from "./styled"
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import "react-circular-progressbar/dist/styles.css";
 
-export default function Footer() {
+export default function Footer({footerPercentage}) {
     const location = useLocation();
     {
         if (location.pathname !== '/cadastro' && location.pathname !== '/') {
@@ -20,7 +20,7 @@ export default function Footer() {
                     <CircularContainer>
                         <Link to={"/hoje"} data-test="today-link">
                             <CircularProgressbar
-                                value={75}
+                                value={footerPercentage}
                                 text={`Hoje`}
                                 background
                                 backgroundPadding={6}
