@@ -43,7 +43,8 @@ export const HabitContainer = styled.div`
 export const IconContainer = styled.div`
     border: 1px solid #E7E7E7;
     border-radius: 5px;
-    background-color: #EBEBEB;
+
+    background-color: ${props=> props.checkColor ? "#8FC549" :"#EBEBEB"};
     max-height: 69px;
     min-width: 69px;
     display: flex;

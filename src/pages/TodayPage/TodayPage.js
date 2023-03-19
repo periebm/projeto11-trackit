@@ -6,20 +6,15 @@ import dayjs from "dayjs"
 import 'dayjs/locale/pt-br'
 
 export default function TodayPage() {
+
     const { token, URL } = useContext(userContext)
     const config = {
         headers: { Authorization: `Bearer ${token}` }
     }
     const [habitsList, setHabitsList] = useState([""])
+    const [doneList, setDone] = useState([])
+    const weekday = ["Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"];
 
-    dayjs.locale('pt-br')
-    let updateLocale = require('dayjs/plugin/updateLocale')
-    dayjs.extend(updateLocale)
-    dayjs.updateLocale('pt-br', {
-        weekdays: [
-            "Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado" 
-        ]
-    })
 
     useEffect(() => {
         axios.get(`${URL}/habits/today`, config)
@@ -29,25 +24,37 @@ export default function TodayPage() {
             .catch((err) => {
                 alert(err.response.data.message)
             });
-
-    }, [])
+    }, [doneList])
 
     function getDate() {
-        const dayWeek = dayjs().day();
-        console.log(dayWeek)
+        const d = new Date();
+        let day = weekday[d.getDay()];
         const dayMonth = dayjs().date();
         const monthYear = dayjs().month();
 
-/*      const dayWeek = dayjs(dayjs().day()).format("dddd");
-        const dayMonth = dayjs(dayjs().date()).format("DD");
-        const monthYear = dayjs(dayjs().month()).format("MM"); */
-
-
-
-        return(`${dayjs(`0`).format("dddd")}, ${dayMonth}/${dayjs(`${monthYear}`).format("MM")} `)
+        return (`${day}, ${dayMonth}/${dayjs(`${monthYear}`).format("MM")} `)
     }
 
-
+    function clickedCheck(id, done) {
+        
+        if (done === false) {
+            axios.post(`${URL}/habits/${id}/check`,{}, config)
+                .then((result) => {
+                    const newDoneList = [...doneList, id]
+                    setDone(newDoneList);
+                }).catch((err) => {
+                    alert(err.response.data.message)
+                });
+        } else {
+            axios.post(`${URL}/habits/${id}/uncheck`,{}, config)
+                .then((result) => {
+                    const newDoneList = doneList.filter(i => i !== id)
+                    setDone(newDoneList);
+                }).catch((err) => {
+                    alert(err.response.data.message)
+                });
+        }
+    }
 
     return (
         <PageContainer>
@@ -62,14 +69,11 @@ export default function TodayPage() {
                         <p data-test="today-habit-record">Seu recorde: {h.highestSequence} dias</p>
                     </div>
 
-                    <IconContainer data-test="today-habit-check-btn">
+                    <IconContainer onClick={() => clickedCheck(h.id, h.done)} checkColor={habitsList.includes(h.id)} data-test="today-habit-check-btn">
                         <ion-icon name="checkmark-sharp"></ion-icon>
                     </IconContainer>
                 </HabitContainer>
             ))}
-
-
         </PageContainer>
     )
 }
-//{dayjs().day()}, {dayjs().date()}/{dayjs().month()}
