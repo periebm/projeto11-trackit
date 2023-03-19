@@ -30,16 +30,20 @@ export default function TodayPage() {
     }, [doneUpdate])
 
     function concludedPercentage(list){
+        setAllDone(false);
         if(list.length === 0 || list===undefined || list=== null) setText("Nenhum hábito concluído ainda")
+        
         else {
             let doneQtd = 0;
             list.forEach(h => {
                 if(h.done === true) doneQtd++;
             });
             const percentage = (doneQtd/list.length)*100;
-            setText(`${percentage.toFixed(0)}% dos hábitos concluídos`)
-            if(percentage > 0) setAllDone(true);
-        }
+            if(percentage > 0) {
+                setText(`${percentage.toFixed(0)}% dos hábitos concluídos`)
+                setAllDone(true);
+            } else setText("Nenhum hábito concluído ainda");
+            }   
     }
 
     function getDate() {
