@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext } from "react"
+import { useState, useContext } from "react"
 import { AddHabitContainer, WeekdaysContainer, DaysButton,CancelButton, SaveCancelButtonsContainer } from "./styled"
 import { ThreeDots } from 'react-loader-spinner'
 import axios from "axios"
@@ -94,5 +94,3 @@ export default function AddHabit({ setAddFlag, selectedDays, daysSelection, setS
         </AddHabitContainer>
     )
 }
-
-//selectedDays.includes(i)
