@@ -44,8 +44,8 @@ export const IconContainer = styled.div`
     border: 1px solid #E7E7E7;
     border-radius: 5px;
     background-color: #EBEBEB;
-    height: 69px;
-    width: 69px;
+    max-height: 69px;
+    min-width: 69px;
     display: flex;
     justify-content: center;
     align-items: center;
