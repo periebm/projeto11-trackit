@@ -44,7 +44,7 @@ export default function HabitListing({ habitsList, deleteFlag, setDeleteFlag }) 
                                     </DaysButton>))}
                             </WeekdaysContainer>}
 
-                        <ion-icon onClick={() => deleteHabit(h.id)} name="trash-outline"></ion-icon>
+                        <ion-icon data-test="habit-delete-btn" onClick={() => deleteHabit(h.id)} name="trash-outline"></ion-icon>
                     </HabitContainer>
                 ))
             }
